@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Procentaje</title>
+    <style>
+      body {
+        font-family: system-ui;
+        color: #fff;
+        background-color: #000;
+      }
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        max-width: 320px;
+        width: 100%;
+        align-items: center;
+        gap: 20px;
+        margin: 0 auto;
+      }
+      h1 {
+        text-align: center;
+      }
+      .result,
+      .procentaje {
+        font-size: 30px;
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+      input[type="number"] {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Cum functioneaza procentjele %%%</h1>
+    <div class="wrapper">
+      <input type="number" min="1" max="99999" value="1934" />
+      <div class="procentaje">50 %</div>
+      <input type="range" min="0" max="100" value="50" />
+
+      <div class="result">967</div>
+    </div>
+    <script>
+      const numberInput = document.querySelector('[type="number"]');
+      const rangeInput = document.querySelector('[type="range"]');
+      const result = document.querySelector(".result");
+      const procentaje = document.querySelector(".procentaje");
+
+      const updateValue = (nr, procentaje) => {
+        result.innerHTML = Math.round(nr * (procentaje / 100) * 100) / 100;
+      };
+
+      numberInput.addEventListener("input", () =>
+        updateValue(parseInt(numberInput.value), parseInt(rangeInput.value))
+      );
+      rangeInput.addEventListener("input", () => {
+        procentaje.innerHTML = `${rangeInput.value} %`;
+        updateValue(parseInt(numberInput.value), parseInt(rangeInput.value));
+      });
+    </script>
+  </body>
+</html>
